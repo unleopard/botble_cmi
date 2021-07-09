@@ -1,0 +1,10 @@
+{
+    "name": "CMI Payment Gateway",
+    "namespace": "Botble\\Cmi\\",
+    "provider": "Botble\\Cmi\\Providers\\CMIServiceProvider",
+    "author": "iwaco dev. team",
+    "url": "https://www.iwaco.ma",
+    "version": "1.0",
+    "description": "CMI payment gateway integration",
+    "require": []
+}
