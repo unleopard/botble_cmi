@@ -9,43 +9,23 @@ class CMI
     public function create_form(array $requestData)
     {
 
-       /* $requestData = [
-            "clientid"=>"600001409",
-            "amount" => "33.04",
-            "okUrl" => "https://cosmos.isla-dev.com/checkout/cmi/success",
-            "failUrl" => "https://cosmos.isla-dev.com/checkout/cmi/fail",
-            "TranType" => "PreAuth",
-            "callbackUrl" => "https://cosmos.isla-dev.com/checkout/cmi/success",
-            "shopurl" => "https://cosmos.isla-dev.com",
-            "currency" => 504,
-            "rnd"=> "0.13410700 1624617765",
-            "storetype" => "3D_PAY_HOSTING",
-            "hashAlgorithm" => "ver3",
-            "lang" => "fr",
-            "BillToName" => "said mohammed",
-            "BillToCompany" => "",
-            "BillToStreet1" => "205, Rue Mostafa el Maani",
-            "BillToCity" => "Casablanca",
-            "BillToStateProv" => "ben m'sik",
-            "BillToCountry" => "MA",
-            "email" => "said.mohammed@gmail.com",
-            "BillToTelVoice" => "0661616161",
-            "encoding" => "UTF-8",
-            "AutoRedirect" => "false",
-            "CallbackResponse" => "1",
-            "oid" => "10000061"
-        ];
-*/
-
         $file = str_replace('src/Library', 'resources/views/form.clt.php', __DIR__);
         $html = file_get_contents($file);
 
         $secret = get_payment_setting('secret', CMI_PAYMENT_METHOD_NAME); // store key
+
+        $message = get_payment_setting('redirect_message', CMI_PAYMENT_METHOD_NAME); // store key
+        $mode = get_payment_setting('mode', CMI_PAYMENT_METHOD_NAME); // store key
+
+        $url = ($mode == 0)? CMI_URL_DEV : CMI_URL_PROD;
+
+
         // $public = get_payment_setting('public', CMI_PAYMENT_METHOD_NAME); // public key
         $hash = $this->hashValue($requestData, $secret); // calcule hash
 
         $html = str_replace('#hash#', $hash, $html);
-
+        $html = str_replace('#action#', $url, $html);
+        $html = str_replace('#message_redirect#', $message, $html);
 
         foreach ($requestData as $key => $value) {
             $html = str_replace('#' . $key . '#', $value, $html);

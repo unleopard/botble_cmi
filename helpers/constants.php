@@ -16,3 +16,11 @@ if (!defined('CMI_URL_SUCCESS')) {
 if (!defined('CMI_URL_FAIL')) {
     define('CMI_URL_FAIL', BASE_URL . '/checkout/cmi/fail');
 }
+
+if (!defined('CMI_URL_DEV')) {
+    define('CMI_URL_DEV', 'https://testpayment.cmi.co.ma/fim/est3Dgate');
+}
+
+if (!defined('CMI_URL_PROD')) {
+    define('CMI_URL_PROD', 'https://payment.cmi.co.ma/fim/est3Dgate');
+}

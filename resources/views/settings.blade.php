@@ -1,4 +1,11 @@
 @php $cmiStatus = get_payment_setting('status', CMI_PAYMENT_METHOD_NAME); @endphp
+
+<style>
+    .border-left {
+
+    }
+</style>
+
 <table class="table payment-method-item">
     <tbody>
     <tr class="border-pay-row">
@@ -59,7 +66,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 border-left">
                     <div class="well bg-white">
                         <div class="form-group">
                             <label class="text-title-field"
@@ -74,9 +81,37 @@
                             <textarea class="next-input" name="payment_{{ CMI_PAYMENT_METHOD_NAME }}_description" id="payment_{{ CMI_PAYMENT_METHOD_NAME }}_description">{{ get_payment_setting('description', CMI_PAYMENT_METHOD_NAME, __('Payment with :name', ['name'=>'CMI'])) }}</textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label class="text-title-field" for="payment_{{ CMI_PAYMENT_METHOD_NAME }}_redirect_message">{{ __('Redirect message') }}</label>
+                            <textarea class="next-input" name="payment_{{ CMI_PAYMENT_METHOD_NAME }}_redirect_message" id="payment_{{ CMI_PAYMENT_METHOD_NAME }}_redirect_message">{{ get_payment_setting('_redirect_message', CMI_PAYMENT_METHOD_NAME, __('Vous allez être redirigé vers la plateforme CMI pour finaliser votre paiement')) }}</textarea>
+                        </div>
+<hr />
+
+
+
                         <p class="payment-note">
                             {{ trans('plugins/payment::payment.please_provide_information') }} <a target="_blank" href="http://www.maroctelecommerce.com/docs/IntegrationPaiementOnlineMTC_V3_3L.pdf">CMI</a>:
                         </p>
+                        <div class="form-group">
+                            <label class="text-title-field" for="{{ CMI_PAYMENT_METHOD_NAME }}_mode">{{ __('Mode') }}</label>
+
+
+                            <label for="{{ CMI_PAYMENT_METHOD_NAME }}_mode_0" class="next-label">
+                                <input type="radio" class="hrv-radio" name="payment_{{ CMI_PAYMENT_METHOD_NAME }}_mode" id="{{ CMI_PAYMENT_METHOD_NAME }}_mode_0"
+                                       value="0" {{ get_payment_setting('mode', CMI_PAYMENT_METHOD_NAME) == 0? 'checked':'' }} />
+                                {{ __('Developpement') }}
+                            </label>
+
+                            <label class="text-title-field" for="{{ CMI_PAYMENT_METHOD_NAME }}_mode">
+                            <input type="radio" class="hrv-radio" name="payment_{{ CMI_PAYMENT_METHOD_NAME }}_mode" id="{{ CMI_PAYMENT_METHOD_NAME }}_mode_1"
+                                   value="1" {{ get_payment_setting('mode', CMI_PAYMENT_METHOD_NAME) == 1? 'checked':'' }} />
+                                {{ __('Production') }}
+                            </label>
+
+                            <!--<input type="text" class="next-input"
+                                   name="payment_{{ CMI_PAYMENT_METHOD_NAME }}_mode" id="{{ CMI_PAYMENT_METHOD_NAME }}_mode"
+                                   value="{{ get_payment_setting('mode', CMI_PAYMENT_METHOD_NAME) }}">-->
+                        </div>
                         <div class="form-group">
                             <label class="text-title-field" for="{{ CMI_PAYMENT_METHOD_NAME }}_public">{{ __('Client id') }}</label>
                             <input type="text" class="next-input"

@@ -1,12 +1,9 @@
 <html>
 <body onload="send();">
 
-<h3>Vous allez redirext vers CMI</h3>
+<h3>#message_redirect#</h3>
 
-
-
-
-<form name="pay_form" action="https://testpayment.cmi.co.ma/fim/est3Dgate" method="post" id="form_cmi">
+<form name="pay_form" action="#action#" method="post" id="form_cmi">
     <style>
         input {
             width: 700px;
@@ -14,10 +11,6 @@
             margin-bottom: 5px;
         }
     </style>
-
-
-
-
 
     <input type="hidden" name="clientid" value="#clientid#" /><br>
     <input type="hidden" name="HASH" value="#hash#" /><br>
